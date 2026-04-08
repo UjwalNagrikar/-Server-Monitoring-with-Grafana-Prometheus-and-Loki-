@@ -58,3 +58,17 @@ Prometheus Config
 nano  prometheus.yml
 
 Alert Rules
+
+nano  alert_rules.yml
+
+groups:
+  - name: node_alerts
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance)(rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 80
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU Usage"
+          description: "CPU usage is above 80%"
