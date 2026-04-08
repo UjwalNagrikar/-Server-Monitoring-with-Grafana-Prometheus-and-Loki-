@@ -72,3 +72,36 @@ groups:
         annotations:
           summary: "High CPU Usage"
           description: "CPU usage is above 80%"
+
+Prometheus Service
+
+sudo nano  /etc/systemd/system/prometheus.service
+[Unit]
+Description=Prometheus
+[Service]
+ExecStart=/home/ubuntu/prometheus-2.52.0.linux-amd64/prometheus --config.file=/home/ubuntu/prometheus-2.
+Restart=always
+[Install]
+WantedBy=multi-user.target
+sudo systemctl daemon-reload
+sudo systemctl start prometheus
+sudo systemctl enable prometheus
+
+3. Alertmanager Installation
+
+wget https://github.com/prometheus/alertmanager/releases/download/v0.27.0/alertmanager-0.27.0.linux-amd6
+tar -xvf alertmanager-0.27.0.linux-amd64.tar.gz
+cd alertmanager-0.27.0.linux-amd64
+Alertmanager Config
+vi alertmanager.yml
+global:
+smtp_smarthost: 'smtp.gmail.com:587'
+smtp_from: 'your-email@gmail.com'
+smtp_auth_username: 'your-email@gmail.com'
+smtp_auth_password: 'your-app-password'
+route:
+receiver: 'email-alert'
+receivers:
+- name: 'email-alert'
+email_configs:
+- to: 'your-email@gmail.com'
