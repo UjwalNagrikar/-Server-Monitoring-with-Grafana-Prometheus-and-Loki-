@@ -49,3 +49,12 @@ sudo systemctl status node_exporter
 2. Prometheus Installation
 
 wget https://github.com/prometheus/prometheus/releases/download/v2.52.0/prometheus-2.52.0.linux-amd64.tar.gz && tar -xvf prometheus-2.52.0.linux-amd64.tar.gz && cd prometheus-2.52.0.linux-amd64
+
+💡 After that (run Prometheus)
+./prometheus --config.file=prometheus.yml
+
+Prometheus Config
+
+nano  prometheus.yml
+
+Alert Rules
